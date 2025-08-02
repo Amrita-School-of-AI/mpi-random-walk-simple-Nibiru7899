@@ -53,7 +53,7 @@ void walker_process()
 {
     // Seed the random number generator.
     // Using rank ensures each walker gets a different sequence of random numbers.
-    srand(time(NULL) + world_rank);
+    srand(time(NULL) * world_rank + world_rank);
 
     // Initialize the walker's position to 0
     int position = 0;
@@ -67,7 +67,7 @@ void walker_process()
         position += direction;
         
         // Check if the walker has moved outside the domain [-domain_size, +domain_size]
-        if (position <= -domain_size || position >= domain_size)
+        if (position < -domain_size || position > domain_size)
         {
             break; // Walk is finished - out of bounds
         }
